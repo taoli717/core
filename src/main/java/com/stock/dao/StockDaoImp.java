@@ -5,6 +5,7 @@ import com.mongodb.DBCursor;
 import com.stock.model.StockModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -22,6 +23,9 @@ public class StockDaoImp implements StockDao{
 
     @Autowired
     private MongoOperations mongoOperation;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Override
     public boolean save(StockModel sm) {
@@ -47,17 +51,27 @@ public class StockDaoImp implements StockDao{
         StockModel dbSm = mongoOperation.findOne(query, StockModel.class);
         return dbSm;
     }
-
+// TODO need to find a ORM mapping
     @Override
-    public StockModel loadNext() {
-        return null;
+    public Object loadNext() {
+        if(getCurrentStockModelDBCursor()!=null){
+            mongoOperation.getConverter();
+            return cursor.next();
+        }else{
+            return null;
+        }
     }
 
-    //TODO can't use mongoOperation, need to change
-    private DBCursor getStockModelDBCursor(){
+    private DBCursor getCurrentStockModelDBCursor(){
         if(cursor == null){
-            //cursor = mongoOperation.findOne(null, StockModel.class);
+            cursor = mongoTemplate.getCollection("stock_model").find();
+
+        }else{
+            while(cursor.hasNext()){
+
+                return cursor;
+            }
         }
-        return null;
+        return cursor;
     }
 }

@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
 public interface StockDao {
     public boolean save(StockModel sm);
     public StockModel load(String stockName);
-    public StockModel loadNext();
+    public Object loadNext();
 }

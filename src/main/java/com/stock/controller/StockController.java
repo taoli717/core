@@ -3,6 +3,7 @@ package com.stock.controller;
 import com.stock.config.AppConfig;
 import com.stock.constant.TestStockName;
 import com.stock.dao.StockDao;
+import com.stock.dao.StockDaoImp;
 import com.stock.model.StockModel;
 import com.stock.retriever.MarkItOnDemondPriceRetriever;
 import com.stock.retriever.PriceRetriever;
@@ -23,6 +24,14 @@ public class StockController {
     public static void main(String[] args) throws Exception {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         StockDao stockDao = (StockDao) ctx.getBean("stockDaoImp");
+        //TODO delete testing
+        for(int i=0; i<10; i++){
+            Object model = stockDao.loadNext();
+            logger.info(model);
+        }
+        /**/
+        //ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        //StockDao stockDao = (StockDao) ctx.getBean("stockDaoImp");
         // String stockName = "NFJ";
         String days = "30000";
         PriceRetriever http = new MarkItOnDemondPriceRetriever();
