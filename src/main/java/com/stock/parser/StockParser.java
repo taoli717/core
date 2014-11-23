@@ -1,6 +1,6 @@
 package com.stock.parser;
 
-import com.stock.constant.DailyStockModel;
+import com.stock.model.DailyStockModel;
 import com.stock.model.StockModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

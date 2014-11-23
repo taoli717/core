@@ -1,4 +1,4 @@
-package com.stock.constant;
+package com.stock.model;
 
 import java.util.Date;
 

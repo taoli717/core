@@ -21,13 +21,13 @@ public class MongoConfig {
 	}
 	
 	@Bean(name="mongoTemplate")
-    public MongoTemplate mongoTemplate() throws Exception {
+public MongoTemplate mongoTemplate() throws Exception {
 
-		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
-		// show error, should off on production to speed up performance
-		mongoTemplate.setWriteConcern(WriteConcern.SAFE);
-		return mongoTemplate;
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+        // show error, should off on production to speed up performance
+        mongoTemplate.setWriteConcern(WriteConcern.SAFE);
+        return mongoTemplate;
 
-	}
+        }
 
 }

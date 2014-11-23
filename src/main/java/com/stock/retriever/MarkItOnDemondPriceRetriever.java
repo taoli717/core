@@ -51,7 +51,7 @@ public class MarkItOnDemondPriceRetriever implements PriceRetriever{
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
-        logger.info(response.toString());
+        //logger.info(response.toString());
         Pattern pattern = Pattern.compile("[/(](.*?)[/)]");
         String input = response.toString().replace("(function () { })", "");
         Matcher matcher = pattern.matcher(input);

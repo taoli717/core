@@ -1,13 +1,10 @@
 package com.stock.model;
 
-import com.allanbank.mongodb.bson.element.UuidElement;
-import com.stock.constant.DailyStockModel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.UUID;
 
 /**
  * Created by PC on 10/28/2014.
@@ -16,6 +13,7 @@ import java.util.UUID;
 public class StockModel {
 
     public StockModel(){}
+    public long seq;
     @Id
     public String stockName;
     public String stockCode;
@@ -45,4 +43,11 @@ public class StockModel {
         this.dailyStocks = dailyStocks;
     }
 
+    public long getSeq() {
+        return seq;
+    }
+
+    public void setSeq(long seq) {
+        this.seq = seq;
+    }
 }

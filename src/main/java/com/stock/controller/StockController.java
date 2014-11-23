@@ -24,27 +24,32 @@ public class StockController {
     public static void main(String[] args) throws Exception {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         StockDao stockDao = (StockDao) ctx.getBean("stockDaoImp");
-        //TODO delete testing
+      /*  //TODO delete testing
         for(int i=0; i<10; i++){
             Object model = stockDao.loadNext();
             logger.info(model);
         }
-        /**/
+        */
         //ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         //StockDao stockDao = (StockDao) ctx.getBean("stockDaoImp");
         // String stockName = "NFJ";
         String days = "30000";
         PriceRetriever http = new MarkItOnDemondPriceRetriever();
         //String[] stocksName = ArrayUtils.addAll(NASDAQStockName.STOCK_NAMES, NYSCStockNames.STOCK_NAMES);
-        //String[] stocksName = TestStockName.ALL_STOCK_NAME;
-        String[] stocksName = {"JEQ"};
+        String[] stocksName = TestStockName.ALL_STOCK_NAME;
+       // String[] stocksName = {"TSLA"};
         ArrayList<String> workingStock = new ArrayList<String>();
         int i = 0;
         long startTime = System.currentTimeMillis();
         for(String stockName : stocksName){
+            Boolean autoIncre = true;
             try{
                 StockModel sm = http.sendGet(stockName, days);
-                stockDao.save(sm);
+                if(i==0){
+                    autoIncre = false;
+                    sm.setSeq(0);
+                }
+                stockDao.save(sm, autoIncre);
                 workingStock.add(sm.getStockName());
                 i++;
                 logger.info("Stock #: " + i);
@@ -53,7 +58,7 @@ public class StockController {
                     try{
                         Thread.sleep(2000);
                         StockModel sm = http.sendGet(stockName, days);
-                        stockDao.save(sm);
+                        stockDao.save(sm, autoIncre);
                         workingStock.add(sm.getStockName());
                         i++;
                         logger.info("Stock #: " + i);
