@@ -22,6 +22,8 @@ public class StockDaoImp implements StockDao{
 
     private static DBCursor cursor;
 
+    long seqIndex = 1;
+
     @Autowired
     private MongoOperations mongoOperation;
 
@@ -61,12 +63,11 @@ public class StockDaoImp implements StockDao{
 // TODO need to find a ORM mapping
     @Override
     public Object loadNext() {
-        if(getCurrentStockModelDBCursor()!=null){
-            mongoOperation.getConverter();
-            return cursor.next();
-        }else{
-            return null;
-        }
+        Query query = new Query();
+        query.addCriteria(Criteria.where("seq").is(seqIndex));
+        StockModel dbSm = mongoOperation.findOne(query, StockModel.class);
+        seqIndex++;
+        return dbSm;
     }
 
     private DBCursor getCurrentStockModelDBCursor(){

@@ -9,9 +9,11 @@ import com.stock.model.StockModel;
  */
 public class StockTraverseImp implements StockTraverse {
 
+    long currentSeq = 0;
     //TODO implement looping stock_model
     @Override
     public StockModel findNext() {
+
         return null;
     }
 
