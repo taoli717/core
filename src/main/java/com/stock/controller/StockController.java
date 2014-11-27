@@ -38,6 +38,7 @@ public class StockController {
         //String[] stocksName = ArrayUtils.addAll(NASDAQStockName.STOCK_NAMES, NYSCStockNames.STOCK_NAMES);
         String[] stocksName = TestStockName.ALL_STOCK_NAME;
        // String[] stocksName = {"TSLA"};
+        //I'm Ken
         ArrayList<String> workingStock = new ArrayList<String>();
         int i = 0;
         long startTime = System.currentTimeMillis();
