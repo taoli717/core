@@ -21,7 +21,6 @@ import java.util.UUID;
 public class StockDaoImp implements StockDao{
 
     private static DBCursor cursor;
-
     long seqIndex = 1;
 
     @Autowired
